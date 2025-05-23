@@ -1,1 +1,3 @@
 # Anterior_Segment_CNN
+
+A CNN (ResNet-50, pre-trained on ImageNet) was integrated to isolate corneal regions in anterior segment photographs and identify specific pathologies. The model, implemented in PyTorch with NumPy, optimized weights and biases using stochastic gradient descent (learning rate: 0.001) and backpropagation. A dataset of 831 annotated images (healthy and infected corneas) was augmented through multiple methods. Performance was evaluated on a test set for accuracy, sensitivity, and specificity. An app incorporating the fine tuned model was built, allowing users to take pictures of their own eyes and obtain real time diagnosis. 
