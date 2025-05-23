@@ -3,7 +3,7 @@ This project uses deep learning to classify eye diseases from slit-lamp photogra
 
 The current implementation includes a multi-class image classification model using convolutional neural networks (CNNs) to differentiate between healthy and diseased eyes. Segmentation and GAN-based enhancements are in progress and will be added in future updates.
 
-Note: Only a portion of the codebase is publicly available due to ongoing development and dataset licensing restrictions. The segmentation and GAN modules are not yet fully implemented.
+Note: Only a portion of the codebase is publicly available due to ongoing development. The model code may be made available upon request. The segmentation and GAN modules are not yet fully implemented.
 
 Features
 Classification of eye images into multiple diagnostic categories
