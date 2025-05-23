@@ -34,4 +34,6 @@ An interactive Streamlit app is included to demonstrate inference on new images.
 Disclaimer
 This project is for research and educational purposes only. It is not intended for clinical use.
 
+Ludovic Perrier 2025
+
 
