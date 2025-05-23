@@ -10,18 +10,18 @@ import torch.nn.functional as F
 import sys
 import os
 
-# Configuration de l'appareil pour compatibilité multi-plateforme
+
 def get_device():
     if torch.cuda.is_available():
         return torch.device("cuda")
-    elif torch.backends.mps.is_available():  # Pour M1 Mac
+    elif torch.backends.mps.is_available():  
         return torch.device("mps")
     else:
         return torch.device("cpu")
 
 device = get_device()
 
-# Visualisation des cartes de caractéristiques
+
 def visualize_feature_maps(model, input_tensor, num_feature_maps=16):
     try:
         feature_extractor = nn.Sequential(*list(model.model.children())[:-2])
@@ -78,20 +78,18 @@ def add_feature_map_visualization(model, input_tensor):
     with st.expander("Cartes de Caractéristiques du Modèle"):
         visualize_feature_maps(model, input_tensor)
 
-# Définition du modèle
-class YourModel(nn.Module):
+class Model(nn.Module):
     def __init__(self):
-        super(YourModel, self).__init__()
+        super(Model, self).__init__()
         self.model = models.resnet34(pretrained=True)
         self.model.fc = nn.Linear(512, 3)
 
     def forward(self, x):
         return self.model(x)
 
-# Chargement du modèle avec gestion d'erreurs
 def load_model(model_path="newer_model.pth"):
     try:
-        model = YourModel()
+        model = Model()
         state_dict = torch.load(model_path, map_location=device)
         model.load_state_dict(state_dict)
         model.to(device)
@@ -101,7 +99,6 @@ def load_model(model_path="newer_model.pth"):
         st.error(f"Erreur lors du chargement du modèle : {e}")
         return None
 
-# Implémentation de GradCAM
 class GradCAM:
     def __init__(self, model, target_layer):
         self.model = model
@@ -190,7 +187,6 @@ def show_gradcam(model, input_tensor, predicted_class):
         finally:
             gradcam.remove_hooks()
 
-# Prétraitement
 def preprocess_image(image):
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
@@ -199,14 +195,13 @@ def preprocess_image(image):
     ])
     return transform(image).unsqueeze(0)
 
-# Informations sur les maladies
 disease_info = {
     "normal": "L'œil semble en bonne santé, sans signes visibles d'infection ou d'anomalie.",
     "epiphore": "L'épiphore est un larmoiement excessif causé par une obstruction des voies lacrymales ou une hyperproduction de larmes.",
     "keratite": "La kératite est une inflammation de la cornée qui peut résulter d'une infection ou d'un traumatisme. Elle nécessite une intervention médicale rapide."
 }
 
-# Application Streamlit principale
+
 def main():
     st.title("Vision IA : Détection Préventive des Maladies Oculaires")
     st.write("Soumettez une image de l'œil pour détecter d'éventuelles pathologies.")
